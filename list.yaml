@@ -5,13 +5,13 @@ actions/setup-go:
       expires-at: 2100-01-20
       keep: true
 hashicorp/setup-terraform:
-    v3:
+    v2:
       expires-at: 2025-01-20
 opentofu/setup-opentofu:
     v1:
       expires-at: 2025-01-20
 helm/chart-testing-action:
-    v2.6.1:
+    v2.5.0:
       expires-at: 2025-01-20
 dorny/paths-filter:
     0bc4621a3135347011ad047f9ecf449bf72ce2bd:
