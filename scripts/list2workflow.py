@@ -30,9 +30,9 @@ on:
 
 jobs:
   dummy:
-  if: false
-  runs-on: ubuntu-latest
-  steps:
+    if: false
+    runs-on: ubuntu-latest
+    steps:
 """
     steps = []
 
@@ -42,6 +42,6 @@ jobs:
             if 'keep' in details and details["keep"]:
                 # this ref will be kept regardless of a new version
                 continue
-            steps.append(f"    - uses: {name}@{ref}")
+            steps.append(f"      - uses: {name}@{ref}")
 
     return header + "\n".join(steps)

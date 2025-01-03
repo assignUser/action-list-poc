@@ -1,0 +1,15 @@
+name: Dummy Workflow
+
+on:
+  workflow_dispatch:
+
+jobs:
+  dummy:
+    if: false
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/setup-go@v5
+      - uses: hashicorp/setup-terraform@v3
+      - uses: opentofu/setup-opentofu@v1
+      - uses: helm/chart-testing-action@v2.6.1
+      - uses: dorny/paths-filter@0bc4621a3135347011ad047f9ecf449bf72ce2bd
