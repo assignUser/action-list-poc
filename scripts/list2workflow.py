@@ -22,8 +22,7 @@ def load_list(list_path: Path) -> ActionsYAML:
 
 
 def generate_workflow(actions: ActionsYAML) -> str:
-    header = """
-name: Dummy Workflow
+    header = """name: Dummy Workflow
 
 on:
   workflow_dispatch:
@@ -35,13 +34,11 @@ jobs:
     steps:
 """
     steps = []
-
-    for name, refs in actions.items():
-        for ref, details in refs.items():
-            print(ref)
-            if 'keep' in details and details["keep"]:
-                # this ref will be kept regardless of a new version
-                continue
-            steps.append(f"      - uses: {name}@{ref}")
+    steps.extend(
+        f"      - uses: {name}@{ref}"
+        for name, refs in actions.items()
+        for ref, details in refs.items()
+        if not details.get("keep")  # Exclude refs with "keep"
+    )
 
     return header + "\n".join(steps)
