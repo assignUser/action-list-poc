@@ -4,9 +4,11 @@ on:
     branches:
       - main
     paths:
+      - ".github/workflows/update_dummy.yml"
       - "list.yml"
   pull_request:
     paths:
+      - ".github/workflows/update_dummy.yml"
       - "list.yml"
 
 permissions:
