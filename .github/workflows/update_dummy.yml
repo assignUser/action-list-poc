@@ -32,8 +32,7 @@ jobs:
       - name: Update Workflow 
         shell: python
         run: |
-          import os
-          print(os.getcwd())
+          sys.path.append(".")
           import gateway as g
           g.update_workflow(".github/workflows/dummy.yml", "list.yml")
 
