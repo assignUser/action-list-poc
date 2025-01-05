@@ -9,7 +9,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/setup-go@v5
-      - uses: hashicorp/setup-terraform@v2
-      - uses: opentofu/setup-opentofu@v1
-      - uses: helm/chart-testing-action@v2.5.0
+      - uses: geekyeggo/delete-artifact@v5
+      - uses: mozilla-actions/sccache-action@v0.0.3
       - uses: dorny/paths-filter@0bc4621a3135347011ad047f9ecf449bf72ce2bd

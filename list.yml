@@ -1,18 +1,15 @@
 actions/setup-go:
-    v5:
-      expires_at: 2025-01-20
-    v4:
-      expires_at: 2100-01-20
-      keep: true
-hashicorp/setup-terraform:
-    v2:
-      expires_at: 2025-01-20
-opentofu/setup-opentofu:
-    v1:
-      expires_at: 2025-01-20
-helm/chart-testing-action:
-    v2.5.0:
-      expires_at: 2025-01-20
+  v5:
+    expires_at: 2100-01-20
+  v4:
+    expires_at: 2024-01-01
+    keep: true
+geekyeggo/delete-artifact:
+  v5:
+    expires_at: 2100-01-20
+mozilla-actions/sccache-action:
+  v0.0.3:
+    expires_at: 2100-01-20
 dorny/paths-filter:
-    0bc4621a3135347011ad047f9ecf449bf72ce2bd:
-      expires_at: 2025-01-19
+  0bc4621a3135347011ad047f9ecf449bf72ce2bd:
+    expires_at: 2100-01-20

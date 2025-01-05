@@ -1,3 +1,4 @@
+import os
 from datetime import date, timedelta
 from pathlib import Path
 from typing import Dict, NotRequired, TypedDict
@@ -41,6 +42,19 @@ def write_str(path: Path, content: str):
         file.write(content)
 
 
+def on_gha():
+    return os.environ.get("GITHUB_ACTION") is not None
+
+
+def gha_print(content: str, title: str = ""):
+    if not on_gha():
+        return
+
+    print(f"::group::{title}")
+    print(content)
+    print("::endgroup::")
+
+
 def generate_workflow(actions: ActionsYAML) -> str:
     # Github Workflow 'yaml' has slight deviations from the yaml spec. (e.g. keys with no values)
     # Because of that it's much easier to generate this as a string rather
@@ -63,7 +77,7 @@ jobs:
         for ref, details in refs.items()
         if not details.get("keep")  # Exclude refs with "keep"
     )
-
+    
     return header + "\n".join(steps)
 
 
@@ -96,6 +110,7 @@ def update_list(dummy_path: Path, list_path: Path):
     actions: ActionsYAML = load_yaml(list_path)
 
     update_refs(steps, actions)
+    gha_print(yaml.safe_dump(actions), "Generated List")
     write_yaml(list_path, actions)
 
 
@@ -113,11 +128,13 @@ def create_pattern(actions: ActionsYAML) -> list[str]:
 
 def update_pattern(pattern_path: Path, list_path: Path):
     actions: ActionsYAML = load_yaml(list_path)
-    pattern = create_pattern(actions)
-    write_yaml(pattern_path, pattern)
+    patterns = create_pattern(actions)
+    gha_print(yaml.safe_dump(patterns), "Generated Patterns")
+    write_yaml(pattern_path, patterns)
 
 
 def update_workflow(dummy_path: Path, list_path: Path):
     actions: ActionsYAML = load_yaml(list_path)
     workflow = generate_workflow(actions)
+    gha_print(workflow, "Generated Workflow")
     write_str(dummy_path, workflow)
