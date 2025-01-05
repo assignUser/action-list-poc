@@ -5,11 +5,11 @@ on:
       - main
     paths:
       - ".github/workflows/update_list.yml"
-      - ".github/workflows.dummy.yml"
+      - ".github/workflows/dummy.yml"
   pull_request:
     paths:
       - ".github/workflows/update_list.yml"
-      - ".github/workflows.dummy.yml"
+      - ".github/workflows/dummy.yml"
 
 permissions:
   contents: read
