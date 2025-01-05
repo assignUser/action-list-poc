@@ -4,9 +4,11 @@ on:
     branches:
       - main
     paths:
+      - ".github/workflows/update_list.yml"
       - ".github/workflows.dummy.yml"
   pull_request:
     paths:
+      - ".github/workflows/update_list.yml"
       - ".github/workflows.dummy.yml"
 
 permissions:
@@ -29,9 +31,12 @@ jobs:
       - name: Update list.yml
         shell: python
         run: |
+          import sys
+          sys.path.append(".")
+
           import gateway as g
           g.update_list(".github/workflows/dummy.yml", "list.yml")
-          g.create_pattern("approved_patterns.yml", "list.yml")
+          g.update_pattern("approved_patterns.yml", "list.yml")
 
       - name: Commit and push changes
         if: ${{ github.even_name == 'push' }}
