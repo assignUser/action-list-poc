@@ -26,6 +26,7 @@ jobs:
         with:
           persist-credentials: true
 
+      - run: ls -a
       - name: Update Workflow 
         shell: python
         run: |
