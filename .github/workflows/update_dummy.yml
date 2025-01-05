@@ -38,7 +38,7 @@ jobs:
           g.update_workflow(".github/workflows/dummy.yml", "list.yml")
 
       - name: Commit and push changes
-        if: ${{ github.even_name == 'push' }}
+        if: ${{ github.event_name == 'push' }}
         run: |
           git config --local user.name "$GITHUB_ACTOR"
           git config --local user.email "$GITHUB_ACTOR@users.noreply.github.com"
