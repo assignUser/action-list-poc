@@ -25,6 +25,7 @@ jobs:
       contents: write
       workflows: write
     steps:
+
       - uses: actions/checkout@v4
         with:
           persist-credentials: true
@@ -37,6 +38,7 @@ jobs:
 
           import gateway as g
           g.update_workflow(".github/workflows/dummy.yml", "list.yml")
+          g.update_pattern("approved_patterns.yml", "list.yml")
 
       - name: Commit and push changes
         if: ${{ github.event_name == 'push' }}

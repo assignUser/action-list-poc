@@ -1,4 +1,4 @@
-name: Handle Updated Refs 
+name: Handle Dependabot update 
 on:
   push:
     branches:
