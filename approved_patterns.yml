@@ -1,0 +1,6 @@
+- actions/setup-go@v5
+- actions/setup-go@v4
+- hashicorp/setup-terraform@v2
+- opentofu/setup-opentofu@v1
+- helm/chart-testing-action@v2.5.0
+- dorny/paths-filter@0bc4621a3135347011ad047f9ecf449bf72ce2bd
