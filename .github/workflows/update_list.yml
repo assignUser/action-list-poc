@@ -36,7 +36,7 @@ jobs:
 
           import gateway as g
           g.update_list(".github/workflows/dummy.yml", "list.yml")
-          g.create_pattern("approved_patterns.yml", "list.yml")
+          g.update_pattern("approved_patterns.yml", "list.yml")
 
       - name: Commit and push changes
         if: ${{ github.even_name == 'push' }}
