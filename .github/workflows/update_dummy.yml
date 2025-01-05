@@ -1,0 +1,42 @@
+name: Update Dummy workflow 
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "list.yml"
+  pull_request:
+    paths:
+      - "list.yml"
+
+permissions:
+  contents: read
+
+# We want workflows on main to run in order to avoid losing data through race conditions
+concurrency: "${{ github.ref }}-${{ github.workflow }}"
+
+jobs:
+  update_list:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+
+      - name: Update Workflow 
+        shell: python
+        run: |
+          import gateway as g
+          g.update_workflow(".github/workflows/dummy.yml", "list.yml")
+
+      - name: Commit and push changes
+        if: ${{ github.even_name == 'push' }}
+        run: |
+          git config --local user.name "$GITHUB_ACTOR"
+          git config --local user.email "$GITHUB_ACTOR@users.noreply.github.com"
+          git add .github/workflows/dummy.yml 
+          git commit -m "Update Workflow" || echo "No changes"
+          git push origin
