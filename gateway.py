@@ -75,9 +75,11 @@ jobs:
         f"      - uses: {name}@{ref}"
         for name, refs in actions.items()
         for ref, details in refs.items()
-        if not details.get("keep")  # Exclude refs with "keep"
+        # exclude actions that entered expiry range, use gt to also exclude actions that were expired today.
+        if details["expires_at"] > calculate_expiry()
+        and not details.get("keep")  # Exclude refs with "keep"
     )
-    
+
     return header + "\n".join(steps)
 
 
