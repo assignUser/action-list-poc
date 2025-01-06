@@ -6,3 +6,4 @@
 - dorny/paths-filter@de90cc6fb38fc0963ad72b210f1f284cd68cea36
 - seanmiddleditch/gha-setup-ninja@v5
 - r-lib/actions@v2
+- r-lib/actions@v1
