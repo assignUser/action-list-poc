@@ -1,23 +1,19 @@
-name: Handle Dependabot update 
+name: Remove Expired Refs
 on:
-  push:
-    branches:
-      - main
-    paths:
-      - ".github/workflows/dummy.yml"
+  schedule:
+    - cron: "4 2 * * *"
+
   pull_request:
     paths:
-      - ".github/workflows/update_list.yml"
-      - ".github/workflows/dummy.yml"
+      - ".github/workflows/remove_expired.yml"
+
+  workflow_dispatch:
 
 permissions:
   contents: read
 
-# We want workflows on main to run in order to avoid losing data through race conditions
-concurrency: "${{ github.ref }}-${{ github.workflow }}"
-
 jobs:
-  update_list:
+  clean_up:
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -26,19 +22,21 @@ jobs:
       - uses: actions/checkout@v4
         with:
           persist-credentials: true
+          # Use PAT so the commit triggers other actions
+          token: ${{ secrets.WORKFLOW_TOKEN }}
 
-      - name: Update list.yml
+      - name: Clean list.yml
         shell: python
         run: |
           import sys
           sys.path.append(".")
 
           import gateway as g
-          g.update_list(".github/workflows/dummy.yml", "list.yml")
+          g.clean_list("list.yml")
           g.update_patterns("approved_patterns.yml", "list.yml")
 
       - name: Commit and push changes
-        if: ${{ github.event_name == 'push' }}
+        if: ${{ github.event_name != 'pull_request' }}
         run: |
           git config --local user.name "$GITHUB_ACTOR"
           git config --local user.email "$GITHUB_ACTOR@users.noreply.github.com"
