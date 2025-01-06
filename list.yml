@@ -22,3 +22,5 @@ seanmiddleditch/gha-setup-ninja:
 r-lib/actions:
   v2:
     expires_at: 2100-01-01
+  v1:
+    expires_at: 2100-01-01
