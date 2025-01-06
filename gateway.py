@@ -128,7 +128,7 @@ def create_pattern(actions: ActionsYAML) -> list[str]:
     return pattern
 
 
-def update_pattern(pattern_path: Path, list_path: Path):
+def update_patterns(pattern_path: Path, list_path: Path):
     actions: ActionsYAML = load_yaml(list_path)
     patterns = create_pattern(actions)
     gha_print(yaml.safe_dump(patterns), "Generated Patterns")
@@ -140,3 +140,29 @@ def update_workflow(dummy_path: Path, list_path: Path):
     workflow = generate_workflow(actions)
     gha_print(workflow, "Generated Workflow")
     write_str(dummy_path, workflow)
+
+
+def remove_expired_refs(actions: ActionsYAML):
+    refs_to_remove: list[tuple[str, str]] = []
+
+    for name, action in actions.items():
+        refs_to_remove.extend(
+            (name, ref)
+            for ref, details in action.items()
+            if details["expires_at"] <= date.today() and not details.get('keep') 
+        )
+
+    # Changing the iterable during iteration raises a RuntimeError
+    for name, ref in refs_to_remove:
+        del actions[name][ref]
+        
+        # remove Actions without refs
+        if not actions[name]:
+            del actions[name]
+
+
+def clean_list(list_path: Path):
+    actions: ActionsYAML = load_yaml(list_path)
+    remove_expired_refs(actions)
+    gha_print(yaml.safe_dump(actions), "Cleaned List")
+    write_yaml(list_path, actions)
