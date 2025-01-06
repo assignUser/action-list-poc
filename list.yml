@@ -19,3 +19,6 @@ dorny/paths-filter:
 seanmiddleditch/gha-setup-ninja:
   v5:
     expires_at: 2100-01-20
+r-lib/actions:
+  v2:
+    expires_at: 2100-01-01
