@@ -13,7 +13,7 @@ permissions:
   contents: read
 
 jobs:
-  update_list:
+  clean_up:
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -25,7 +25,7 @@ jobs:
           # Use PAT so the commit triggers other actions
           token: ${{ secrets.WORKFLOW_TOKEN }}
 
-      - name: Update list.yml
+      - name: Clean list.yml
         shell: python
         run: |
           import sys
