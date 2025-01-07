@@ -9,7 +9,10 @@ geekyeggo/delete-artifact:
     expires_at: 2100-01-20
 mozilla-actions/sccache-action:
   v0.0.3:
-    expires_at: 2100-01-20
+    expires_at: 2025-02-04
+  v0.0.7:
+    expires_at: 2100-01-01
+    keep: false
 dorny/paths-filter:
   0bc4621a3135347011ad047f9ecf449bf72ce2bd:
     expires_at: 2025-02-02
