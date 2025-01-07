@@ -131,10 +131,10 @@ def create_pattern(actions: ActionsYAML) -> list[str]:
 def update_patterns(pattern_path: Path, list_path: Path):
     actions: ActionsYAML = load_yaml(list_path)
     patterns = create_pattern(actions)
-    patterns_str = yaml.safe_dump(patterns)
     comment = "# This is a generated file. DO NOT UPDATE MANUALLY.\n# When a change is detected the org allowlist will be updated.\n"
-    gha_print(patterns_str, "Generated Patterns")
-    write_str(pattern_path, comment + patterns_str)
+    patterns_str =  comment + yaml.safe_dump(patterns)
+    gha_print(patterns_str , "Generated Patterns")
+    write_str(pattern_path, patterns_str)
 
 
 def update_workflow(dummy_path: Path, list_path: Path):
