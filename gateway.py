@@ -105,15 +105,15 @@ def update_refs(
     return action_refs
 
 
-def update_list(dummy_path: Path, list_path: Path):
+def update_actions(dummy_path: Path, actions_path: Path):
     dummy = load_yaml(dummy_path)
     steps: list[dict[str, str]] = dummy["jobs"]["dummy"]["steps"]
 
-    actions: ActionsYAML = load_yaml(list_path)
+    actions: ActionsYAML = load_yaml(actions_path)
 
     update_refs(steps, actions)
     gha_print(yaml.safe_dump(actions), "Generated List")
-    write_yaml(list_path, actions)
+    write_yaml(actions_path, actions)
 
 
 def create_pattern(actions: ActionsYAML) -> list[str]:
@@ -163,8 +163,8 @@ def remove_expired_refs(actions: ActionsYAML):
             del actions[name]
 
 
-def clean_list(list_path: Path):
-    actions: ActionsYAML = load_yaml(list_path)
+def clean_actions(actions_path: Path):
+    actions: ActionsYAML = load_yaml(actions_path)
     remove_expired_refs(actions)
-    gha_print(yaml.safe_dump(actions), "Cleaned List")
-    write_yaml(list_path, actions)
+    gha_print(yaml.safe_dump(actions), "Cleaned Actions")
+    write_yaml(actions_path, actions)
