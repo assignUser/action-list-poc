@@ -65,7 +65,7 @@ def test_create_pattern():
     assert pattern == expected
 
 
-def test_clean_list():
+def test_clean_actions():
 
     refs: ActionsYAML = {
         "actions/setup-go": {

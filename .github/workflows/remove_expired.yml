@@ -25,21 +25,21 @@ jobs:
           # Use PAT so the commit triggers other actions
           token: ${{ secrets.WORKFLOW_TOKEN }}
 
-      - name: Clean list.yml
+      - name: Clean actions.yml
         shell: python
         run: |
           import sys
           sys.path.append(".")
 
           import gateway as g
-          g.clean_list("list.yml")
-          g.update_patterns("approved_patterns.yml", "list.yml")
+          g.clean_actions("actions.yml")
+          g.update_patterns("approved_patterns.yml", "actions.yml")
 
       - name: Commit and push changes
         if: ${{ github.event_name != 'pull_request' }}
         run: |
           git config --local user.name "$GITHUB_ACTOR"
           git config --local user.email "$GITHUB_ACTOR@users.noreply.github.com"
-          git add list.yml approved_patterns.yml
+          git add -f actions.yml approved_patterns.yml
           git commit -m "Update Actions" || echo "No changes"
           git push origin

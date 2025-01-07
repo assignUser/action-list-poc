@@ -5,11 +5,11 @@ on:
     branches:
       - main
     paths:
-      - "list.yml"
+      - "actions.yml"
   pull_request:
     paths:
       - ".github/workflows/update_dummy.yml"
-      - "list.yml"
+      - "actions.yml"
 
 permissions:
   contents: read
@@ -35,14 +35,14 @@ jobs:
           sys.path.append(".")
 
           import gateway as g
-          g.update_workflow(".github/workflows/dummy.yml", "list.yml")
-          g.update_patterns("approved_patterns.yml", "list.yml")
+          g.update_workflow(".github/workflows/dummy.yml", "actions.yml")
+          g.update_patterns("approved_patterns.yml", "actions.yml")
 
       - name: Commit and push changes
         if: ${{ github.event_name != 'pull_request' }}
         run: |
           git config --local user.name "$GITHUB_ACTOR"
           git config --local user.email "$GITHUB_ACTOR@users.noreply.github.com"
-          git add .github/workflows/dummy.yml approved_patterns.yml
+          git add -f .github/workflows/dummy.yml approved_patterns.yml
           git commit -m "Update Workflow" || echo "No changes"
           git push origin

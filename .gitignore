@@ -1,3 +1,6 @@
+# Generated file, prevent accidental commits
+approved_patterns.yml
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]

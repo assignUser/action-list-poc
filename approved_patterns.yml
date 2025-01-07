@@ -1,3 +1,5 @@
+# This is a generated file. DO NOT UPDATE MANUALLY.
+# When a change is detected the org allowlist will be updated.
 - actions/setup-go@v5
 - actions/setup-go@v4
 - geekyeggo/delete-artifact@v5
