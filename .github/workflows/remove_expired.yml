@@ -40,6 +40,6 @@ jobs:
         run: |
           git config --local user.name "$GITHUB_ACTOR"
           git config --local user.email "$GITHUB_ACTOR@users.noreply.github.com"
-          git add list.yml approved_patterns.yml
+          git add -f list.yml approved_patterns.yml
           git commit -m "Update Actions" || echo "No changes"
           git push origin
