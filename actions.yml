@@ -8,8 +8,6 @@ geekyeggo/delete-artifact:
   v5:
     expires_at: 2100-01-20
 mozilla-actions/sccache-action:
-  v0.0.3:
-    expires_at: 2025-02-04
   v0.0.7:
     expires_at: 2100-01-01
     keep: false

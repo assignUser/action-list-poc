@@ -3,7 +3,6 @@
 - actions/setup-go@v5
 - actions/setup-go@v4
 - geekyeggo/delete-artifact@v5
-- mozilla-actions/sccache-action@v0.0.3
 - mozilla-actions/sccache-action@v0.0.7
 - dorny/paths-filter@de90cc6fb38fc0963ad72b210f1f284cd68cea36
 - seanmiddleditch/gha-setup-ninja@v5
