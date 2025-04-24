@@ -10,7 +10,7 @@ jobs:
     steps:
       - uses: actions/setup-go@v5
       - uses: geekyeggo/delete-artifact@v5
-      - uses: mozilla-actions/sccache-action@v0.0.7
+      - uses: mozilla-actions/sccache-action@v0.0.9
       - uses: dorny/paths-filter@de90cc6fb38fc0963ad72b210f1f284cd68cea36
       - uses: seanmiddleditch/gha-setup-ninja@v6
       - uses: r-lib/actions@v2
